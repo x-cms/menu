@@ -1,0 +1,9 @@
+{
+    "alias": "menu",
+    "name": "Menu",
+    "author": "xcms",
+    "description": "This is the description for the Menu module.",
+    "namespace": "Xcms\\Menu",
+    "version": "1.0",
+    "autoload": "psr-4"
+}
