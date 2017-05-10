@@ -1,3 +1,8 @@
+<?php
+/**
+ * @var \Illuminate\Support\Collection $links
+ */
+?>
 @forelse($links as $key => $link)
     @if(isset($link['heading']) && $link['heading'] && !$isChildren)
         <li class="header">{{ $link['heading'] or '' }}</li>

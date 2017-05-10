@@ -2,6 +2,8 @@
 
 namespace Xcms\Menu\Support;
 
+use Illuminate\Support\Collection;
+
 class Menu
 {
     /**
@@ -41,11 +43,9 @@ class Menu
      */
     public function registerItem(array $options)
     {
-
         if (isset($options['children'])) {
             unset($options['children']);
         }
-
         $defaultOptions = [
             'id' => null,
             'priority' => 99,
@@ -58,9 +58,7 @@ class Menu
             'children' => [],
             'permissions' => [],
         ];
-
         $options = array_merge($defaultOptions, $options);
-
         $id = $options['id'];
 
         if (!$id) {
@@ -95,7 +93,7 @@ class Menu
 
     /**
      * Rearrange links
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     protected function rearrangeLinks()
     {
@@ -107,19 +105,17 @@ class Menu
     /**
      * Get children items
      * @param null $id
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     protected function getChildren($id = null)
     {
         $children = collect([]);
-
         foreach ($this->links as $key => $row) {
             if ($row['parent_id'] == $id) {
                 $row['children'] = $this->getChildren($row['id']);
                 $children->push($row);
             }
         }
-
         return $children->sortBy('priority');
     }
 

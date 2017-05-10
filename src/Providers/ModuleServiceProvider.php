@@ -45,6 +45,9 @@ class ModuleServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        //merge config
+        $this->mergeConfigFrom(__DIR__ . '/../../config/menu.php', 'menu');
+
         //Load helpers
         $this->loadHelpers();
 
