@@ -98,9 +98,9 @@ class Menu
     protected function setActiveItems($active)
     {
         foreach ($this->links as $key => $value) {
+            $this->active[] = $active;
             foreach ($value['children'] as $k => $v){
                 if ($k == $active) {
-                    $this->active[] = $active;
                     $this->active[] = $key;
                 }
             }
