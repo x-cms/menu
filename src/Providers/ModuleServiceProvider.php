@@ -52,10 +52,7 @@ class ModuleServiceProvider extends ServiceProvider
         $this->loadHelpers();
 
         //register menu
-        foreach (config('menu') as $key => $value){
-            $value['id'] = $key;
-            menu()->registerItem($value);
-        }
+        menu()->registerItem(config('menu'));
 
         $this->app->register(RouteServiceProvider::class);
 

@@ -1,38 +1,32 @@
-<?php
-/**
- * @var \Illuminate\Support\Collection $links
- */
-?>
 @forelse($links as $key => $link)
     @if(isset($link['heading']) && $link['heading'] && !$isChildren)
         <li class="header">{{ $link['heading'] or '' }}</li>
     @endif
     @php
-        $hasChildren = ($link['children']->count()) ? true : false;
+        $hasChildren = !$link['children']->isEmpty();
     @endphp
     {{--@if(has_permissions($loggedInUser, $link['permissions']))--}}
-        <li class="treeview {{ $hasChildren ? 'menu-item-has-children' : '' }} {{ (in_array($link['id'], $active)) ? 'active open' : '' }}"
-            data-id="{{ $link['id'] or '' }}" data-priority="{{ $link['priority'] or '' }}">
-            <a href="{{ $link['link'] or '' }}" class="nav-link {{ $hasChildren ? 'nav-toggle' : '' }}">
-                <i class="{{ isset($link['font_icon']) && $link['font_icon'] ? $link['font_icon'] : '' }}"></i>
-                <span class="title">{{ $link['title'] or '' }}</span>
-                @if($hasChildren)
-                    <span class="pull-right-container">
+    <li class="{{ $hasChildren ? 'treeview' : '' }} {{ (in_array($key, $active)) ? 'active' : '' }}">
+        <a href="{{ $link['link'] or '' }}" class="nav-link {{ $hasChildren ? 'nav-toggle' : '' }}">
+            <i class="{{ isset($link['icon']) && $link['icon'] ? $link['icon'] : '' }}"></i>
+            <span class="title">{{ $link['title'] or '' }}</span>
+            @if($hasChildren)
+                <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                 </span>
-                @endif
-            </a>
-            @if($hasChildren)
-                <ul class="sub-menu treeview-menu">
-                    @include('menu::menu', [
-                        'links' => $link['children'],
-                        'isChildren' => true,
-                        'level' => ($level + 1),
-                        'active' => $active,
-                    ])
-                </ul>
             @endif
-        </li>
+        </a>
+        @if($hasChildren)
+            <ul class="treeview-menu">
+                @include('menu::menu', [
+                    'links' => $link['children'],
+                    'isChildren' => true,
+                    'level' => ($level + 1),
+                    'active' => $active,
+                ])
+            </ul>
+        @endif
+    </li>
     {{--@endif--}}
 @empty
 
