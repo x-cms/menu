@@ -18,7 +18,7 @@ return [
                 'link' => '/admin/users',
             ],
             'roles' => [
-                'title' => '用户角色',
+                'title' => '角色组',
                 'icon' => 'fa fa-circle-o',
                 'link' => '/admin/roles',
             ],
