@@ -7,6 +7,22 @@ return [
         'icon' => 'fa fa-home',
         'link' => '/admin',
     ],
+    'posts' => [
+        'heading' => '内容管理',
+        'title' => '文章管理',
+        'icon' => 'fa fa-edit',
+        'link' => '/admin/posts'
+    ],
+    'categories' => [
+        'title' => '分类管理',
+        'icon' => 'fa fa-sitemap',
+        'link' => '/admin/categories'
+    ],
+    'tags' => [
+        'title' => '标签管理',
+        'icon' => 'fa fa-tags',
+        'link' => '/admin/tags'
+    ],
     'setting' => [
         'heading' => '系统设置',
         'title' => '权限管理',
