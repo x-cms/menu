@@ -7,8 +7,13 @@ return [
         'icon' => 'fa fa-home',
         'link' => '/admin',
     ],
-    'posts' => [
+    'pages' => [
         'heading' => '内容管理',
+        'title' => '页面管理',
+        'icon' => 'fa fa-copy',
+        'link' => '/admin/pages'
+    ],
+    'posts' => [
         'title' => '文章管理',
         'icon' => 'fa fa-edit',
         'link' => '/admin/posts'
