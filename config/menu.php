@@ -49,5 +49,10 @@ return [
                 'link' => '/admin/permissions',
             ]
         ]
-    ]
+    ],
+    'menus' => [
+        'title' => '菜单管理',
+        'icon' => 'fa fa-circle-o',
+        'link' => '/admin/menus',
+    ],
 ];
