@@ -28,6 +28,17 @@ return [
         'icon' => 'fa fa-tags',
         'link' => '/admin/tags'
     ],
+    'plugins' => [
+        'heading' => '插件与模板',
+        'title' => '插件管理',
+        'icon' => 'fa fa-paper-plane',
+        'link' => '/admin/plugins'
+    ],
+    'themes' => [
+        'title' => '模板管理',
+        'icon' => 'fa fa-magic',
+        'link' => '/admin/themes'
+    ],
     'setting' => [
         'heading' => '系统设置',
         'title' => '权限管理',
