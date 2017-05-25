@@ -63,7 +63,7 @@ return [
     ],
     'menus' => [
         'title' => '菜单管理',
-        'icon' => 'fa fa-circle-o',
+        'icon' => 'fa fa-bars',
         'link' => '/admin/menus',
     ],
 ];

@@ -4,6 +4,7 @@ namespace Xcms\Menu\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Xcms\Base\Http\Controllers\SystemController;
+use Xcms\Menu\Models\Menu;
 
 class MenuController extends SystemController
 {
@@ -27,11 +28,16 @@ class MenuController extends SystemController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|string
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        if($request->isMethod('post')){
+            return Menu::all()->toJson();
+        }
+
+        $this->setPageTitle('菜单管理');
+        return view('menu::index');
     }
 
     /**
@@ -41,7 +47,7 @@ class MenuController extends SystemController
      */
     public function create()
     {
-        //
+        return view('menu::create');
     }
 
     /**
@@ -52,7 +58,14 @@ class MenuController extends SystemController
      */
     public function store(Request $request)
     {
-        //
+        $menu = new Menu();
+        $menu->name = $request->name;
+        $menu->slug = $request->slug;
+        $menu->order = $request->order;
+
+        $menu->save();
+
+        return redirect()->route('menus.index')->with('success_msg', '添加菜单成功');
     }
 
     /**
@@ -74,7 +87,9 @@ class MenuController extends SystemController
      */
     public function edit($id)
     {
-        //
+        $menu = Menu::find($id);
+
+        return view('menu::edit', compact('menu'));
     }
 
     /**
@@ -86,7 +101,14 @@ class MenuController extends SystemController
      */
     public function update(Request $request, $id)
     {
-        //
+        $menu = Menu::find($id);
+        $menu->name = $request->name;
+        $menu->slug = $request->slug;
+        $menu->order = $request->order;
+
+        $menu->save();
+
+        return redirect()->route('menus.index')->with('success_msg','编辑菜单成功');
     }
 
     /**
@@ -97,6 +119,7 @@ class MenuController extends SystemController
      */
     public function destroy($id)
     {
-        //
+        Menu::destroy($id);
+        return response()->json(['code' => 200, 'message' => '删除菜单成功']);
     }
 }
