@@ -4,7 +4,10 @@ namespace Xcms\Menu\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Xcms\Base\Http\Controllers\SystemController;
+use Xcms\Blog\Models\Category;
+use Xcms\Blog\Models\Tag;
 use Xcms\Menu\Models\Menu;
+use Xcms\Page\Models\Page;
 
 class MenuController extends SystemController
 {
@@ -47,7 +50,13 @@ class MenuController extends SystemController
      */
     public function create()
     {
-        return view('menu::create');
+        $pages = Page::all();
+        $categories = Category::attr(['name' => 'parent_id', 'class' => 'form-control select2'])
+            ->placeholder(0, '顶级分类')
+            ->renderAsDropdown();
+        $tags = Tag::all();
+
+        return view('menu::create', compact('pages', 'categories', 'tags'));
     }
 
     /**
