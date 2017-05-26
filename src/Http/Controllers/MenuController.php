@@ -51,9 +51,7 @@ class MenuController extends SystemController
     public function create()
     {
         $pages = Page::all();
-        $categories = Category::attr(['name' => 'parent_id', 'class' => 'form-control select2'])
-            ->placeholder(0, '顶级分类')
-            ->renderAsDropdown();
+        $categories = collect(Category::renderAsArray());
         $tags = Tag::all();
 
         return view('menu::create', compact('pages', 'categories', 'tags'));

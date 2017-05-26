@@ -18,7 +18,7 @@
         </a>
         @if($hasChildren)
             <ul class="treeview-menu">
-                @include('menu::menu', [
+                @include('menu::partials.menu', [
                     'links' => $link['children'],
                     'isChildren' => true,
                     'level' => ($level + 1),

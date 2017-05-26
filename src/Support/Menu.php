@@ -127,7 +127,7 @@ class Menu
     public function render()
     {
         $links = $this->rearrangeLinks();
-        return view('menu::menu', [
+        return view('menu::partials.menu', [
             'isChildren' => false,
             'links' => $links,
             'level' => 0,
