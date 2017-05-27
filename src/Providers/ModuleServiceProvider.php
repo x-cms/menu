@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Xcms\Menu\Facades\MenuFacade;
+use Xcms\Menu\Facades\DashboardMenuFacade;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -58,7 +58,7 @@ class ModuleServiceProvider extends ServiceProvider
 
         //Register related facades
         $loader = AliasLoader::getInstance();
-        $loader->alias('Menu', MenuFacade::class);
+        $loader->alias('Menu', DashboardMenuFacade::class);
     }
 
     protected function loadHelpers()

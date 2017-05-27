@@ -7,6 +7,7 @@ use Xcms\Base\Http\Controllers\SystemController;
 use Xcms\Blog\Models\Category;
 use Xcms\Blog\Models\Tag;
 use Xcms\Menu\Models\Menu;
+use Xcms\Menu\Models\MenuNode;
 use Xcms\Page\Models\Page;
 
 class MenuController extends SystemController
@@ -66,11 +67,19 @@ class MenuController extends SystemController
     public function store(Request $request)
     {
         $menu = new Menu();
+        $menuNode = new MenuNode();
         $menu->name = $request->name;
         $menu->slug = $request->slug;
         $menu->order = $request->order;
-
         $menu->save();
+
+        $result = $menu->id;
+
+        $menuStructure = json_decode($request->get('menu_structure'), true);
+
+        foreach ($menuStructure as $order => $node){
+            $menuNode->updateMenuNode($result, $node, $order);
+        }
 
         return redirect()->route('menus.index')->with('success_msg', '添加菜单成功');
     }
@@ -95,8 +104,12 @@ class MenuController extends SystemController
     public function edit($id)
     {
         $menu = Menu::find($id);
+        $pages = Page::all();
+        $categories = collect(Category::renderAsArray());
+        $tags = Tag::all();
+        $menuStructure = json_encode($menu->all_menu_nodes);
 
-        return view('menu::edit', compact('menu'));
+        return view('menu::edit', compact('menu', 'pages', 'categories', 'tags', 'menuStructure'));
     }
 
     /**

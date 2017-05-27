@@ -5,7 +5,7 @@ namespace Xcms\Menu\Support;
 use Illuminate\Support\Collection;
 use Xcms\Acl\Models\Admin;
 
-class Menu
+class DashboardMenu
 {
     /**
      * Get all registered links from package
@@ -30,7 +30,8 @@ class Menu
     protected $builtHtml;
 
     /**
-     * @param Admin $user
+     * @param Admin $admin
+     * @internal param Admin $user
      */
     public function setUser(Admin $admin)
     {

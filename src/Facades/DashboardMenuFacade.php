@@ -3,15 +3,15 @@
 namespace Xcms\Menu\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Xcms\Menu\Support\Menu;
+use Xcms\Menu\Support\DashboardMenu;
 
-class MenuFacade extends Facade
+class DashboardMenuFacade extends Facade
 {
     /**
      * @return string
      */
     protected static function getFacadeAccessor()
     {
-        return Menu::class;
+        return DashboardMenu::class;
     }
 }
