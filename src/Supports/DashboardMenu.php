@@ -1,6 +1,6 @@
 <?php
 
-namespace Xcms\Menu\Support;
+namespace Xcms\Menu\Supports;
 
 use Illuminate\Support\Collection;
 use Xcms\Acl\Models\Admin;

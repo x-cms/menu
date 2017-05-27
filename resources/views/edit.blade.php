@@ -159,7 +159,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">打开方式</label>
-                            <select name="" class="form-control" data-field="target">
+                            <select class="form-control" data-field="target">
                                 <option value="">默认</option>
                                 <option value="_self">_self</option>
                                 <option value="_blank">_blank</option>
@@ -185,7 +185,7 @@
                 <textarea name="menu_structure"
                           id="menu_structure"
                           class="hidden"
-                          style="display: none;">[]</textarea>
+                          style="display: none;">{!! $menuStructure or '[]' !!}</textarea>
                 <textarea name="deleted_nodes"
                           id="deleted_nodes"
                           class="hidden"
@@ -242,7 +242,7 @@
                     <div class="box-footer">
                         <div class="col-md-2"></div>
                         <div class="col-md-6">
-                            <a class="btn btn-primary" href="http://xcms.local/admin/tags">返回列表</a>
+                            <a class="btn btn-primary" href="{{ route('menus.index') }}">返回列表</a>
                             <button type="submit" class="btn btn-primary">确认提交</button>
                         </div>
                     </div>
@@ -284,7 +284,7 @@
                     </label>
                     <label data-field="target">
                         <span class="text">打开方式</span>
-                        <select>
+                        <select class="form-control">
                             <option value="">默认</option>
                             <option value="_self">_self</option>
                             <option value="_blank">_blank</option>

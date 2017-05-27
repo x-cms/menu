@@ -104,10 +104,11 @@ class MenuController extends SystemController
     public function edit($id)
     {
         $menu = Menu::find($id);
+        $menuNode = new MenuNode();
         $pages = Page::all();
         $categories = collect(Category::renderAsArray());
         $tags = Tag::all();
-        $menuStructure = json_encode($menu->all_menu_nodes);
+        $menuStructure = json_encode($menuNode->getMenuNodes($id));
 
         return view('menu::edit', compact('menu', 'pages', 'categories', 'tags', 'menuStructure'));
     }
@@ -122,11 +123,20 @@ class MenuController extends SystemController
     public function update(Request $request, $id)
     {
         $menu = Menu::find($id);
+        $menuNode = new MenuNode();
         $menu->name = $request->name;
         $menu->slug = $request->slug;
         $menu->order = $request->order;
 
         $menu->save();
+
+        $result = $menu->id;
+
+        $menuStructure = json_decode($request->get('menu_structure'), true);
+
+        foreach ($menuStructure as $order => $node){
+            $menuNode->updateMenuNode($result, $node, $order);
+        }
 
         return redirect()->route('menus.index')->with('success_msg','编辑菜单成功');
     }

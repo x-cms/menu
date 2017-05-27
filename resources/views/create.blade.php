@@ -90,7 +90,7 @@
                                         <label class="mt-checkbox mt-checkbox-outline">
                                             <input type="checkbox" value="{{ $tag->id }}">
                                             <span></span>
-                                            <span class="text">{{ $tag->title }}</span>
+                                            <span class="text">{{ $tag->name }}</span>
                                         </label>
                                     </li>
                                 @endforeach

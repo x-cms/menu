@@ -44,15 +44,15 @@ class MenuNode extends Model
         return array_get($this->relatedModelInfo, 'url');
     }
 
-//    protected function resolveRelatedModel()
-//    {
-//        if ($this->type === 'custom-link') {
-//            return null;
-//        }
-//        $this->relatedModelInfo = menus_management()->getObjectInfoByType($this->type, $this->related_id);
-//
-//        return $this->relatedModelInfo;
-//    }
+    protected function resolveRelatedModel()
+    {
+        if ($this->type === 'custom-link') {
+            return null;
+        }
+        $this->relatedModelInfo = menus_manager()->getObjectInfoByType($this->type, $this->related_id);
+
+        return $this->relatedModelInfo;
+    }
 
     /**
      * @var Collection
@@ -115,10 +115,10 @@ class MenuNode extends Model
         }
 
         if (!$this->allRelatedNodes) {
-            $this->allRelatedNodes = $this->model
-                ->where('menu_id', $menuId->id)
+            $this->allRelatedNodes = $this
+                ->where('menu_id', $menuId)
                 ->select(['id', 'menu_id', 'parent_id', 'related_id', 'type', 'url', 'title', 'icon_font', 'css_class', 'target'])
-                ->orderBy('sort_order', 'ASC')
+                ->orderBy('order', 'ASC')
                 ->get();
         }
 
