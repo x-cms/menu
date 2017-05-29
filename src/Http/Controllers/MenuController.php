@@ -133,9 +133,16 @@ class MenuController extends SystemController
         $result = $menu->id;
 
         $menuStructure = json_decode($request->get('menu_structure'), true);
+        $deletedNodes = json_decode($request->get('deleted_nodes'), true);
 
-        foreach ($menuStructure as $order => $node){
-            $menuNode->updateMenuNode($result, $node, $order);
+        if($deletedNodes) {
+            $menuNode->destroy($deletedNodes);
+        }
+
+        if ($menuStructure !== null) {
+            foreach ($menuStructure as $order => $node) {
+                $menuNode->updateMenuNode($result, $node, $order);
+            }
         }
 
         return redirect()->route('menus.index')->with('success_msg','编辑菜单成功');

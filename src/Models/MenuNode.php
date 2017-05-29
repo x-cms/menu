@@ -105,14 +105,6 @@ class MenuNode extends Model
      */
     public function getMenuNodes($menuId, $parentId = null)
     {
-        if($menuId instanceof Menu) {
-            $menu = $menuId;
-        } else {
-            $menu = $this->find($menuId);
-        }
-        if(!$menu) {
-            return null;
-        }
 
         if (!$this->allRelatedNodes) {
             $this->allRelatedNodes = $this
