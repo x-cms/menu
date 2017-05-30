@@ -91,4 +91,41 @@ class MenuManager
 
         return (array)$result;
     }
+
+    public function generateMenu($args = [])
+    {
+        $slug = array_get($args, 'slug');
+        if (!$slug) {
+            return null;
+        }
+        $parent_id = array_get($args, 'parent_id', 0);
+        $active = array_get($args, 'active', true);
+        $options = $this->html->attributes(array_get($args, 'options', []));
+
+        $menu = $this->menuRepository->findBySlug($slug, $active, ['menus.id', 'menus.slug']);
+
+        if (!$menu) {
+            return null;
+        }
+
+        $menuContent = $this->menuContentRepository->getFirstBy(['menu_id' => $menu->id]);
+        if (!$menuContent) {
+            $menu_nodes = [];
+        } else {
+            $menu_nodes = $this->menuNodeRepository->getByMenuContentId($menuContent->id, $parent_id, [
+                'id',
+                'menu_content_id',
+                'parent_id',
+                'related_id',
+                'icon_font',
+                'css_class',
+                'target',
+                'url',
+                'title',
+                'type'
+            ]);
+        }
+
+        return view('menu::partials.default', compact('menu_nodes', 'menu', 'options'))->render();
+    }
 }
