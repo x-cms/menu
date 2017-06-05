@@ -28,6 +28,16 @@ return [
         'icon' => 'fa fa-tags',
         'link' => '/admin/tags'
     ],
+    'navs' => [
+        'title' => '导航管理',
+        'icon' => 'fa fa-navicon',
+        'link' => '/admin/navs'
+    ],
+    'media' => [
+        'title' => '媒体管理',
+        'icon' => 'fa fa-camera',
+        'link' => '/admin/media'
+    ],
     'plugins' => [
         'heading' => '插件与模板',
         'title' => '插件管理',

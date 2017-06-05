@@ -3,7 +3,8 @@
 namespace Xcms\Menu\Supports;
 
 use Illuminate\Support\Collection;
-use Xcms\Acl\Models\Admin;
+use Xcms\Acl\Models\AdminUser;
+use Xcms\Themes\Facades\ThemeFacade;
 
 class DashboardMenu
 {
@@ -20,7 +21,7 @@ class DashboardMenu
     protected $active = [];
 
     /**
-     * @var Admin
+     * @var AdminUser
      */
     protected $loggedInUser;
 
@@ -30,10 +31,10 @@ class DashboardMenu
     protected $builtHtml;
 
     /**
-     * @param Admin $admin
+     * @param AdminUser $admin
      * @internal param Admin $user
      */
-    public function setUser(Admin $admin)
+    public function setUser(AdminUser $admin)
     {
         $this->loggedInUser = $admin;
     }
@@ -54,10 +55,10 @@ class DashboardMenu
             'permissions' => [],
         ];
 
-        foreach ($options as $key =>$option){
+        foreach ($options as $key => $option) {
 
-            if(isset($option['children'])){
-                foreach ($option['children'] as $k => $child){
+            if (isset($option['children'])) {
+                foreach ($option['children'] as $k => $child) {
                     $option['children'][$k] = array_merge($defaultOptions, $child);
                 }
                 $option['children'] = collect($option['children']);
@@ -100,7 +101,7 @@ class DashboardMenu
     {
         foreach ($this->links as $key => $value) {
             $this->active[] = $active;
-            foreach ($value['children'] as $k => $v){
+            foreach ($value['children'] as $k => $v) {
                 if ($k == $active) {
                     $this->active[] = $key;
                 }
@@ -136,4 +137,5 @@ class DashboardMenu
             'loggedInUser' => $this->loggedInUser
         ])->render();
     }
+
 }
